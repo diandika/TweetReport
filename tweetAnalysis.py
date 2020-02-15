@@ -1,17 +1,15 @@
 import twitter
-
-CONSUMER_KEY = '2FNkTi5ORWCvMmHy9gmuay3x4'
-CONSUMER_SECRET_KEY = 'IUv0UF7NeQ1c1LZYvDwZs1SYRJ8o3cWIeSrBEdLUP4ZFjF7oPe'
-ACCESS_TOKEN = '845123262-Iyq1hogBBYMlw8QfupmI3PPsycz0Sf43mUgCA4Q1'
-ACCESS_SECRET_TOKEN = 'D4N2ZpjK85ieXYumpQcsCCJSGKZmJniTayFC7QYYuADrd'
+import json
 
 
 class TweetAnalysis:
     def __init__(self, username="diandika99"):
-        self.consumer_key = CONSUMER_KEY
-        self.consumer_secret_key = CONSUMER_SECRET_KEY
-        self.acces_token = ACCESS_TOKEN
-        self.acces_secret_token = ACCESS_SECRET_TOKEN
+        file = open("api_key.json", "r")
+        api_json = json.load(file)
+        self.consumer_key = api_json["CONSUMER_KEY"]
+        self.consumer_secret_key = api_json["CONSUMER_SECRET_KEY"]
+        self.acces_token = api_json["ACCESS_TOKEN"]
+        self.acces_secret_token = api_json["ACCESS_SECRET_TOKEN"]
         self.username = username
 
     def connect(self):

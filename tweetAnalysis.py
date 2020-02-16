@@ -1,6 +1,7 @@
 import twitter
 import json
 
+import operator
 
 class TweetAnalysis:
     def __init__(self, username="diandika99"):
@@ -37,8 +38,19 @@ class TweetAnalysis:
             username = screen_name
         print(count, username)
         tweets = self.twitter.GetFavorites(screen_name=username, count=count, return_json=True)
+        user_list = {}
         for tweet in tweets:
-            print("text:", tweet["text"])
+            screen_name = tweet["user"]["screen_name"]
+            if screen_name in user_list:
+                user_list[screen_name] += 1
+            else:
+                user_list[screen_name] = 1
+            # print(tweet["user"]["screen_name"])
+
+        user_list = sorted(user_list.items(), key=operator.itemgetter(1), reverse=True)
+
+        for user, count in user_list:
+            print(user, ':', count)
 
     # def activity_frequency(self):
 

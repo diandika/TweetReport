@@ -6,7 +6,7 @@ account = TweetAnalysis()
 
 # account.connect()
 account.get_tweet(count=200, screen_name='aimi_sound')
-account.get_liked_tweet(count=10)
+account.get_liked_tweet()
 
 '''
 top = tkinter.Tk()

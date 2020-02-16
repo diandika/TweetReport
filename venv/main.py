@@ -1,9 +1,18 @@
 import tkinter
 
-if __name__ == '__main__' :
-    top = tkinter.Tk()
+from tweetAnalysis import TweetAnalysis
 
-    b = tkinter.Button(top, text="button")
+account = TweetAnalysis()
 
-    b.pack()
-    top.mainloop()
+# account.connect()
+account.get_tweet(count=200, screen_name='aimi_sound')
+account.get_liked_tweet(count=10)
+
+'''
+top = tkinter.Tk()
+
+b = tkinter.Button(top, text="button")
+
+b.pack()
+top.mainloop()
+'''

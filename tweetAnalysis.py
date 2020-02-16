@@ -22,8 +22,23 @@ class TweetAnalysis:
             username = screen_name
         print(count, username)
         tweets = self.twitter.GetListTimeline(slug=username, owner_screen_name=username, count=count, return_json=True)
+        count = 0
+        tweet_list = []
         for tweet in tweets:
-            print("text:", tweet['text'])
+            if "RT" in tweet["text"]:
+                tweet_list.append(tweet["text"])
+                count = count + 1
+        print("retweeted tweet count:", count)
+
+    def get_liked_tweet(self, count=200, screen_name=None):
+        if screen_name is None:
+            username = self.username
+        else:
+            username = screen_name
+        print(count, username)
+        tweets = self.twitter.GetFavorites(screen_name=username, count=count, return_json=True)
+        for tweet in tweets:
+            print("text:", tweet["text"])
 
     # def activity_frequency(self):
 

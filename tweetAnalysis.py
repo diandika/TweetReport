@@ -86,8 +86,7 @@ class TweetAnalysis:
 
         user_list = sorted(user_list.items(), key=operator.itemgetter(1), reverse=True)
 
-        for user, count in user_list:
-            print("liked", user, "'s tweet:", count, "times")
+        return user_list
 
     # def activity_frequency(self):
 
@@ -97,4 +96,9 @@ class TweetAnalysis:
 
     # def top_5_retweeted_account(self):
 
-    # def top_5_liked_account(self):
+    def top_5_liked_account(self, count=200, screen_name=None, page=1):
+        user_list = self.get_liked_tweet(count=count, screen_name=screen_name, page=page)
+        top_5 = user_list[0:5]
+
+        for user, count in top_5:
+            print("liked", user, "'s tweet:", count, "times")

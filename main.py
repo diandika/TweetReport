@@ -6,7 +6,7 @@ account = TweetAnalysis()
 
 # account.connect()
 # account.get_tweet(count=200, screen_name='diandika99', page=5)
-account.get_liked_tweet(page=4)
+account.top_5_liked_account(page=5)
 
 '''
 top = tkinter.Tk()

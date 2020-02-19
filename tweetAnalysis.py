@@ -1,3 +1,6 @@
+import datetime
+import time
+
 import twitter
 import json
 
@@ -17,7 +20,7 @@ class TweetAnalysis:
     def connect(self):
         print(self.twitter.VerifyCredentials())
 
-    def get_tweet(self, count=200, screen_name=None, page=1):
+    def get_tweet(self, count=200, screen_name=None, page=1, oldest=None):
         if screen_name is None:
             username = self.username
         else:
@@ -40,7 +43,18 @@ class TweetAnalysis:
                 print("search finished")
                 break
 
-            all_tweets.extend(tweets)
+            x = len(tweets)
+            if oldest is not None:
+                for idx in range(len(tweets)):
+                    tweet_date = time.strptime(tweets[idx]['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
+                    tweet_date = time.strftime('%Y-%m-%d %H:%M:%S', tweet_date)
+                    tweet_date = datetime.datetime.strptime(tweet_date, '%Y-%m-%d %H:%M:%S')
+
+                    if tweet_date < oldest:
+                        x = idx
+                        break
+
+            all_tweets.extend(tweets[0:x])
             oldest_tweet = tweets[-1]
             max_id = oldest_tweet["id"]
             print("get:", len(all_tweets), "tweets")
